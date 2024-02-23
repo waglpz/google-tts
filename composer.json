@@ -25,7 +25,8 @@
     "require": {
         "php": "^8.2",
         "ext-json": "*",
-        "google/cloud-text-to-speech": "^v1.8"
+        "google/cloud-text-to-speech": "^v1.8",
+        "waglpz/di-container": "^2.0"
     },
     "require-dev": {
         "doctrine/coding-standard": "^12.0",
