@@ -32,19 +32,36 @@ final class SynthesizeSpeechStrategyFactory
 
     public function createStrategy(): SynthesizeSpeechStrategy
     {
+        $audioConfig  = $this->defaultAudioConfig();
+        $voiceOptions = $this->defaultVoiceOptions();
+
+        return new SimpleSynthesizeSpeechStrategy($audioConfig, $voiceOptions);
+    }
+
+    public function createStrategyWav8000(): SynthesizeSpeechStrategy
+    {
+        $audioConfig  = $this->defaultAudioConfig()->setSampleRateHertz(8000);
+        $voiceOptions = $this->defaultVoiceOptions();
+
+        return new SimpleSynthesizeSpeechStrategy($audioConfig, $voiceOptions);
+    }
+
+    private function defaultAudioConfig(): AudioConfig
+    {
         $audioProfileIds = \array_map(static fn ($id) => $id->value, $this->audioProfile);
 
-        $audioConfig = (new AudioConfig())
+        return (new AudioConfig())
             ->setEffectsProfileId($audioProfileIds)
             ->setSpeakingRate((float) $this->speakingRate->value)
             ->setAudioEncoding($this->audioEncoding->value);
+    }
 
-        $voiceOptions = (new VoiceSelectionParams())
+    private function defaultVoiceOptions(): VoiceSelectionParams
+    {
+        return (new VoiceSelectionParams())
             ->setSsmlGender($this->speechGender->value)
             ->setName($this->voiceType->value())
             ->setLanguageCode($this->languageCode->value);
-
-        return new SimpleSynthesizeSpeechStrategy($audioConfig, $voiceOptions);
     }
 
     public function withSpeakingRate(SpeakingRate $speakingRate): self
