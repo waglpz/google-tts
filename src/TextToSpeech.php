@@ -19,9 +19,14 @@ final class TextToSpeech
     }
 
     /** @throws ApiException */
-    public function convert(string $text): SynthesizeSpeechResponse
+    public function convert(string $text, bool $isSsml = false): SynthesizeSpeechResponse
     {
-        $this->input->setText($text);
+        if ($isSsml) {
+            $this->input->setSsml($text);
+        } else {
+            $this->input->setText($text);
+        }
+
         $request = $this->strategy->setSynthesisInput($this->input);
 
         return $this->client->synthesizeSpeech($request);
