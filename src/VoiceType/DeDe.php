@@ -28,6 +28,11 @@ enum DeDe: string implements VoiceTypeEnum
     case FEMALE_WAVENET_C  = 'de-DE-Wavenet-C';
     case FEMALE_WAVENET_F  = 'de-DE-Wavenet-F';
 
+    case FEMALE_CHIRPHD_0     = 'de-DE-Chirp-HD-O';
+    case FEMALE_CHIRPHD_AOEDE = 'de-DE-Chirp3-HD-Aoede';
+    case FEMALE_CHIRPHD_LEDA  = 'de-DE-Chirp3-HD-Leda';
+    case FEMALE_CHIRPHD_KORE  = 'de-DE-Chirp3-HD-Kore';
+
     public function value(): string
     {
         return $this->value;
